@@ -27,5 +27,7 @@ foreach ($drives as $letter) {
 	for ($i = 0; $i <= 10; $i++) {
 		shell_exec(sprintf(HDBCMD, $letter, $label, $i));
 	}
-  
-  `%windir%\SysWoW64\vbscript /nologo "D:\Scripts\ejectdvd.vbs {$letter}`;
+	
+	`%windir%\SysWoW64\vbscript /nologo "D:\Scripts\ejectdvd.vbs {$letter}`;
+	
+}
