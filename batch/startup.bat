@@ -3,8 +3,13 @@ SetLocal EnableDelayedExpansion
 
 :check
 
+ping -n 31 127.0.0.1 > nul
+
+C:\TiVo2\php\php.php C:\TiVo2\scripts\php\ripsdvds.php
+
 ping -n 6 127.0.0.1 > nul
 
-php D:\Scripts\php\ripsdvds.php
+cd C:\TiVo2\scripts
+git pull origin master
 
 goto check
