@@ -1,6 +1,6 @@
 <?php
 
-define('NO_DISC', 'the device is not ready.');
+define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 
 define('HANDBRAKE', 'C:\TiVo2\HandBrake.exe -i "%s" -o "D:\Temp\%s-%d.m4v" -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
 
@@ -24,11 +24,13 @@ foreach ($drives as $letter) {
 	
 	$label = trim($label);
 	
-	$label = explode(PHP_EOL, $label);
+	$label = str_replace(NEW_LINES, "\n", $label);
+	
+	$label = explode("\n", $label);
 	
 	$label = trim($label[0]);
 	
-	$label = substr($label, 22);
+	$label = substr($label, 21);
 	var_dump($label);exit;
 	if ($label === NO_DISC) {
 		continue;
