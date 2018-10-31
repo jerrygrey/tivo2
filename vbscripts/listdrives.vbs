@@ -3,7 +3,6 @@ Set cdroms = oWMP.cdromCollection
 
 for i = 0 to cdroms.Count-1
 	WScript.Echo cdroms.Item(i).driveSpecifier
-	WScript.Echo
 next
 
 oWMP.close
