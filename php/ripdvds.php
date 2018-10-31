@@ -52,7 +52,7 @@ foreach ($drives as $letter) {
 	
 	var_dump($label);exit;
 	for ($i = 0; $i <= 10; $i++) {
-		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label'.DIRECTORY_SEPARATOR.'$i.'.m4v'));
+		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.DIRECTORY_SEPARATOR.$i.'.m4v'));
 	}
 	
 	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
