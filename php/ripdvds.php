@@ -9,17 +9,17 @@ $drives = shell_exec('%windir%\SysWoW64\cscript /nologo "C:\TiVo2\scripts\vbscri
 $drives = trim($drives);
 
 $drives = explode(PHP_EOL, $optical_drives);
-
+var_dump($drives);
 foreach ($drives as $letter) {
-	
+	var_dump($letter);
 	$letter = trim($letter);
 	
-	$label = `vol {$letter}`;
-	
+	$label = shell_exec('vol '.$letter);
+	var_dump($label);exit;
 	$label = trim($label);
 	
 	$label = strtolower($label);
-	var_dump($label,$letter);exit;
+	
 	if ($label === NO_DISC) {
 		continue;
 	}
