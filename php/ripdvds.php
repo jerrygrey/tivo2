@@ -25,7 +25,7 @@ foreach ($drives as $letter) {
 	}
 	
 	for ($i = 0; $i <= 10; $i++) {
-		shell_exec(sprintf(HDBCMD, $letter, $label, $i));
+		shell_exec(sprintf(HANDBRAKE, $letter, $label, $i));
 	}
 	
 	`%windir%\SysWoW64\vbscript /nologo "D:\Scripts\vbscripts\ejectdisc.vbs" {$letter}`;
