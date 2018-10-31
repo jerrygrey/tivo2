@@ -5,10 +5,10 @@ define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 define('HANDBRAKE', 'C:\TiVo2\HandBrake.exe -i "%s" -o "%s" -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
 define('CSCRIPT', '%windir%\SysWoW64\cscript /nologo "%s"');
 
-define('DIR_SCRIPTS', 'C:\TiVo2\scripts\vbscripts');
+define('DIR_SCRIPTS', 'C:\TiVo2\scripts\vbscripts\');
 define('DIR_WORKING', 'D:\Working\');
 
-$drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'\listdrives.vbs'));
+$drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
 
 $drives = trim($drives);
 
@@ -55,6 +55,6 @@ foreach ($drives as $letter) {
 		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.'\'.$i.'.m4v'));
 	}
 	
-	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'\ejectdisc.vbs').' '.$letter);
+	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
 	
 }
