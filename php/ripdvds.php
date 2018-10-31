@@ -14,12 +14,14 @@ foreach ($drives as $letter) {
 	
 	$letter = trim($letter);
 	
+	$return = exec('dir '.$letter, $output, $error);
+	var_dump($return,$output,$error);exit;
 	$label = shell_exec('vol '.$letter);
 	
 	$label = trim($label);
 	
 	$label = strtolower($label);
-	var_dump($label);exit;
+	
 	if ($label === NO_DISC) {
 		continue;
 	}
