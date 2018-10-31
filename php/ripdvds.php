@@ -50,7 +50,7 @@ foreach ($drives as $letter) {
 	
 	mkdir(DIR_WORKING.$label);
 	
-	for ($i = 1; $i <= 10; $i++) {
+	for ($i = 1; $i <= 25; $i++) {
 		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.DIRECTORY_SEPARATOR.$i, $i));
 	}
 	
