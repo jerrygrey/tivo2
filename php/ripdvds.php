@@ -50,7 +50,6 @@ foreach ($drives as $letter) {
 	
 	mkdir(DIR_WORKING.$label);
 	
-	var_dump($label);exit;
 	for ($i = 0; $i <= 10; $i++) {
 		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.DIRECTORY_SEPARATOR.$i.'.m4v'));
 	}
