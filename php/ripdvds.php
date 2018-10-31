@@ -24,7 +24,11 @@ foreach ($drives as $letter) {
 	
 	$label = trim($label);
 	
-	$label = strtolower($label);
+	$label = explode(PHP_EOL, $label);
+	
+	$label = trim($label[0]);
+	
+	$label = substr($label, 22);
 	var_dump($label);exit;
 	if ($label === NO_DISC) {
 		continue;
