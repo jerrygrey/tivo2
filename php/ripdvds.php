@@ -2,11 +2,11 @@
 
 define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 
-define('HANDBRAKE', 'C:\TiVo2\HandBrake.exe -i "%s" -o "%s" -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
-define('CSCRIPT', '%windir%\SysWoW64\cscript /nologo "%s"');
+define('HANDBRAKE', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'HandBrake.exe -i "%s" -o "%s" -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
+define('CSCRIPT', '%windir%'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
 
-define('DIR_SCRIPTS', 'C:\TiVo2\scripts\vbscripts\');
-define('DIR_WORKING', 'D:\Working\');
+define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
+define('DIR_WORKING', 'D:'.DIRECTORY_SEPARATOR.'Working'.DIRECTORY_SEPARATOR);
 
 $drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
 
@@ -52,7 +52,7 @@ foreach ($drives as $letter) {
 	
 	var_dump($label);exit;
 	for ($i = 0; $i <= 10; $i++) {
-		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.'\'.$i.'.m4v'));
+		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label'.DIRECTORY_SEPARATOR.'$i.'.m4v'));
 	}
 	
 	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
