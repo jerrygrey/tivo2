@@ -8,7 +8,7 @@ define('CSCRIPT', '%windir%\SysWoW64\cscript /nologo "%s"');
 define('DIR_SCRIPTS', 'C:\TiVo2\scripts\vbscripts');
 define('DIR_WORKING', 'D:\Working\');
 
-$drives = shell_exec(sprintf(CSCRIPT, DIRECTORY.'\listdrives.vbs');
+$drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'\listdrives.vbs');
 
 $drives = trim($drives);
 
@@ -55,6 +55,6 @@ foreach ($drives as $letter) {
 		shell_exec(sprintf(HANDBRAKE, $letter, DIR_WORKING.$label.'\'.$i.'.m4v'));
 	}
 	
-	shell_exec(sprintf(CSCRIPT, DIRECTORY.'\ejectdisc.vbs').' '.$letter);
+	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'\ejectdisc.vbs').' '.$letter);
 	
 }
