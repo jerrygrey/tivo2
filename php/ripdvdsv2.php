@@ -2,9 +2,8 @@
 
 define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 
-define('HANDBRAKE_SCAN', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --title 0 -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
-define('HANDBRAKE_MOVIES', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --main-feature -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
-define('HANDBRAKE_TVSHOWS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --title %d -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
+define('HANDBRAKE_SCAN', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" --title 0 -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
+define('HANDBRAKE_RIP', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --title %d -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
 define('CSCRIPT', 'C:'.DIRECTORY_SEPARATOR.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
 
 define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
@@ -52,13 +51,21 @@ foreach ($drives as $letter) {
 		
 	}
 	
-	shell_exec(sprintf(HANDBRAKE_MOVIES, $letter, DIR_WORKING.$label));
+	mkdir(DIR_WORKING.$label);
 	
-	/*mkdir(DIR_WORKING.$label);
+	$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 	
-	for ($i = 1; $i <= 10; $i++) {
-		shell_exec(sprintf(HANDBRAKE_TVSHOWS, $letter, DIR_WORKING.$label.DIRECTORY_SEPARATOR.$i, $i));
-	}*/
+	$output = shell_exec(sprintf(HANDBRAKE_SCAN, $letter));
+	
+	$output = preg_split('#found [\d]+ valid title\(s\)#', $output);
+	
+	preg_match_all('#\+ title ([\d]+)\:#', $output, $titles);
+	
+	$titles = $titles[1];
+	
+	foreach ($titles as $title) {
+		shell_exec(sprintf(HANDBRAKE_RIP, $letter, $directory.$title, $title));
+	}
 	
 	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
 	
