@@ -3,8 +3,6 @@ SetLocal EnableDelayedExpansion
 
 :check
 
-ping -n 6 127.0.0.1 > nul
-
 cd C:\TiVo2\scripts
 git pull origin master
 
