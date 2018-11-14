@@ -69,13 +69,13 @@ foreach ($drives as $drive) {
 			
 		}
 		
-		/*mkdir($directory);*/
+		mkdir($directory);
 		
 		$directory = $directory.DIRECTORY_SEPARATOR;
-		var_dump($file,$where,$directory,$output);
-		/*rename($where.$file, $directory.$file);
 		
-		shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));*/
+		rename($where.$file, $directory.$file);
+		
+		shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));
 		
 	}
 	
