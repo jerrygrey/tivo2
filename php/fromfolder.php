@@ -10,9 +10,14 @@ $files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SE
 
 foreach ($files as $file) {
 	
-	$directory = DIR_WORKING.'Automatic';
-	$file = DIRECTORY_SEPARATOR.$file;
+	$file = substr($file, 0, strlen(DIR_AUTOMATIC));
 	
+	$output = explode('.', $file);
+	
+	$output = implode('-', $output);
+	
+	$directory = DIR_WORKING.$output;
+	var_dump($file,$output,$directory);exit;
 	if (file_exists($directory)) {
 		
 		$counter = 1;
@@ -29,6 +34,6 @@ foreach ($files as $file) {
 	
 	rename(DIR_AUTOMATIC.$file, $directory.$file);
 	
-	shell_exec(sprintf(HANDBRAKE, DIR_AUTOMATIC.$file, $directory.$file));
+	shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));
 	
 }
