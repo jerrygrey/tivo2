@@ -5,14 +5,28 @@ define('HANDBRAKE', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbr
 define('DIR_AUTOMATIC', 'D:'.DIRECTORY_SEPARATOR.'Automatic'.DIRECTORY_SEPARATOR);
 define('DIR_WORKING', 'D:'.DIRECTORY_SEPARATOR.'Working'.DIRECTORY_SEPARATOR);
 
-$directory = new RecursiveDirectoryIterator(DIR_AUTOMATIC, RecursiveDirectoryIterator::SKIP_DOTS);
-$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+try {
+	
+	$directory = new RecursiveDirectoryIterator(DIR_AUTOMATIC, RecursiveDirectoryIterator::SKIP_DOTS);
+	$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+	
+} catch (Exception $e) {
+	
+	exit;
+	
+}
 
 foreach ($files as $file) {
 	
-	$file = substr($file, strlen(DIR_AUTOMATIC));
+	$where = explode(DIRECTORY_SEPARATOR, $file);
+	
+	$file = array_pop($where);
+	
+	$where = implode(DIRECTORY_SEPARATOR, $where);
 	
 	$output = explode('.', $file);
+	
+	end($output);
 	
 	$output = implode('-', $output);
 	
@@ -34,7 +48,7 @@ foreach ($files as $file) {
 	
 	$directory = $directory.DIRECTORY_SEPARATOR;
 	
-	rename(DIR_AUTOMATIC.$file, $directory.$file);
+	rename($where.$file, $directory.$file);
 	
 	shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));
 	
