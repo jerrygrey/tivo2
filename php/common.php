@@ -16,6 +16,42 @@ define('HANDBRAKE_DVD', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'ha
 
 define('CSCRIPT', 'C:'.DIRECTORY_SEPARATOR.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
 
-function shell_clean () {
+function shell_clean_up ( $output ) {
+	
+	$output = strtoupper($output);
+	
+	$output = substr($output, 7);
+	
+	$output = trim($output);
+	
+	$output = str_replace(NEW_LINES, "\n", $output);
+	
+	$output = explode("\n", $output);
+	
+	return array_map('trim', $drives);
+	
+}
+
+function file_clearance ( $name, $format = '', $directory = DIR_WORKING ) {
+	
+	if (!empty($format)) {
+		$format = '.'.$format;
+	}
+	
+	$name = preg_replace('#[^a-z0-9]+#is', '', $name);
+	
+	if (file_exists($directory.$name.$format)) {
+		
+		$counter = 1;
+		
+		while (file_exists($directory.$name.$counter.$format)) {
+			$counter++;
+		}
+		
+		$name = $name.$counter;
+		
+	}
+	
+	return $name;
 	
 }
