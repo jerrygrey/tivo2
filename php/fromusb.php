@@ -18,7 +18,9 @@ $drives = str_replace(NEW_LINES, "\n", $drives);
 
 $drives = explode("\n", $drives);
 
-$drives = array_diff($drives, ['c:']);
+$drives = array_map('trim', $drives);
+
+$drives = array_diff($drives, ['c:','d:']);
 
 var_dump($drives);exit;
 
