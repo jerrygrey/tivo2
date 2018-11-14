@@ -22,18 +22,32 @@ $drives = array_map('trim', $drives);
 
 $drives = array_diff($drives, ['c:','d:']);
 
-var_dump($drives);exit;
-
 foreach ($drives as $drive) {
-
-
-	$directory = new RecursiveDirectoryIterator(DIR_AUTOMATIC, RecursiveDirectoryIterator::SKIP_DOTS);
+	
+	$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 	$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 	
 	foreach ($files as $file) {
 		
-		$directory = DIR_WORKING.'Automatic';
-		$file = DIRECTORY_SEPARATOR.$file;
+		$where = explode(DIRECTORY_SEPARATOR, $file);
+		
+		$file = array_pop($where);
+		
+		$where = implode(DIRECTORY_SEPARATOR, $file);
+		
+		$output = explode('.', $file);
+		
+		$format = end($output);
+		
+		$format = strtolower($format)];
+		
+		if (!in_array($format, FILE_FORMATS, true)) {
+			continue;
+		}
+		
+		$output = implode('-', $output);
+		
+		$directory = DIR_WORKING.$output;
 		
 		if (file_exists($directory)) {
 			
@@ -47,11 +61,13 @@ foreach ($drives as $drive) {
 			
 		}
 		
-		mkdir($directory);
+		/*mkdir($directory);*/
 		
-		rename(DIR_AUTOMATIC.$file, $directory.$file);
+		$directory = $directory.DIRECTORY_SEPARATOR;
+		var_dump($file,$where,$directory,$output);
+		/*rename($where.$file, $directory.$file);
 		
-		shell_exec(sprintf(HANDBRAKE, DIR_AUTOMATIC.$file, $directory.$file));
+		shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));*/
 		
 	}
 	
