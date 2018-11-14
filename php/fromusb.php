@@ -24,8 +24,16 @@ $drives = array_diff($drives, ['c:','d:']);
 
 foreach ($drives as $drive) {
 	
-	$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
-	$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+	try {
+		
+		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
+		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+		
+	} catch (Exception $e) {
+		
+		continue;
+		
+	}
 	
 	foreach ($files as $file) {
 		
