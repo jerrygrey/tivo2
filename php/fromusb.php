@@ -41,7 +41,7 @@ foreach ($drives as $drive) {
 		
 		$file = array_pop($where);
 		
-		$where = implode(DIRECTORY_SEPARATOR, $file);
+		$where = implode(DIRECTORY_SEPARATOR, $where);
 		
 		$output = explode('.', $file);
 		
