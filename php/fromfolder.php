@@ -28,7 +28,9 @@ foreach ($files as $file) {
 	
 	end($output);
 	
-	$output = implode('-', $output);
+	$output = implode('', $output);
+	
+	$output = preg_replace('#[^a-z0-9]+#is', '', $output);
 	
 	$directory = DIR_WORKING.$output;
 	
