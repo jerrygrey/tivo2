@@ -18,3 +18,7 @@ $drives = explode("\n", $drives);
 $drives = array_map('trim', $drives);
 
 $drives = array_diff($drives, EXCLUDED);
+
+foreach ($drives as $drive) {
+	
+}
