@@ -1,9 +1,7 @@
 <?php
 
 define('FILE_FORMATS', ['avi','mp4','m4v','mpg','mov']);
-
 define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
-
 define('EXCLUDED_DRIVES', ['C:','D:']);
 
 define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
