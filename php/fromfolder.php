@@ -10,7 +10,7 @@ $files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SE
 
 foreach ($files as $file) {
 	
-	$file = substr($file, 0, strlen(DIR_AUTOMATIC));
+	$file = substr($file, strlen(DIR_AUTOMATIC));
 	
 	$output = explode('.', $file);
 	
