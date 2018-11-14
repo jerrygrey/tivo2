@@ -39,7 +39,7 @@ foreach ($drives as $drive) {
 		
 		$format = end($output);
 		
-		$format = strtolower($format)];
+		$format = strtolower($format);
 		
 		if (!in_array($format, FILE_FORMATS, true)) {
 			continue;
