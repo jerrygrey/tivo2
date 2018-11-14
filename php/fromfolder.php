@@ -17,7 +17,7 @@ foreach ($files as $file) {
 	$output = implode('-', $output);
 	
 	$directory = DIR_WORKING.$output;
-	var_dump($file,$output,$directory);exit;
+	
 	if (file_exists($directory)) {
 		
 		$counter = 1;
@@ -31,6 +31,8 @@ foreach ($files as $file) {
 	}
 	
 	mkdir($directory);
+	
+	$directory = $directory.DIRECTORY_SEPARATOR;
 	
 	rename(DIR_AUTOMATIC.$file, $directory.$file);
 	
