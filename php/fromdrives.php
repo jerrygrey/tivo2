@@ -4,7 +4,9 @@ define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 define('FILE_FORMATS', ['avi','mp4','m4v','mpg','mov']);
 
 define('HANDBRAKE', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --main-feature -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
+define('CSCRIPT', 'C:'.DIRECTORY_SEPARATOR.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
 
+define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
 define('DIR_AUTOMATIC', 'D:'.DIRECTORY_SEPARATOR.'Automatic'.DIRECTORY_SEPARATOR);
 define('DIR_WORKING', 'D:'.DIRECTORY_SEPARATOR.'Working'.DIRECTORY_SEPARATOR);
 
@@ -21,6 +23,8 @@ $drives = explode("\n", $drives);
 $drives = array_map('trim', $drives);
 
 $drives = array_diff($drives, ['c:','d:']);
+
+$eject = false;
 
 foreach ($drives as $drive) {
 	
@@ -53,7 +57,9 @@ foreach ($drives as $drive) {
 			continue;
 		}
 		
-		$output = implode('-', $output);
+		$output = implode('', $output);
+		
+		$output = preg_replace('#[^a-z0-9]+#is', '', $output);
 		
 		$directory = DIR_WORKING.$output;
 		
@@ -73,10 +79,14 @@ foreach ($drives as $drive) {
 		
 		$directory = $directory.DIRECTORY_SEPARATOR;
 		
-		rename($where.$file, $directory.$file);
+		rename($where.$file, $directory.$output);
 		
-		shell_exec(sprintf(HANDBRAKE, $directory.$file, $directory.$output));
+		shell_exec(sprintf(HANDBRAKE, $directory.$output, $directory.$output));
 		
 	}
 	
+}
+
+if ($eject) {
+	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
 }
