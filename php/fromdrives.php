@@ -1,37 +1,71 @@
 <?php
 
-define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
-define('FILE_FORMATS', ['avi','mp4','m4v','mpg','mov']);
-
-define('HANDBRAKE', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --main-feature -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 2.5 --keep-display-aspect --native-language eng --native-dub');
-define('CSCRIPT', 'C:'.DIRECTORY_SEPARATOR.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
-
-define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
-define('DIR_AUTOMATIC', 'D:'.DIRECTORY_SEPARATOR.'Automatic'.DIRECTORY_SEPARATOR);
-define('DIR_WORKING', 'D:'.DIRECTORY_SEPARATOR.'Working'.DIRECTORY_SEPARATOR);
+require 'common.php';
 
 $drives = shell_exec('wmic logicaldisk get caption');
 
-$drives = strtolower($drives);
-$drives = substr($drives, 7);
-$drives = trim($drives);
+$drives = shell_clean_up($drives);
 
-$drives = str_replace(NEW_LINES, "\n", $drives);
+$discs = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
 
-$drives = explode("\n", $drives);
+$discs = shell_clean_up($discs);
 
-$drives = array_map('trim', $drives);
+$dvds = [];
 
-$drives = array_diff($drives, ['c:','d:']);
+foreach ($discs as $disc) {
+	
+	exec('dir '.$drive, $output, $error);
+	
+	if ($error !== 0) {
+		continue;
+	}
+	
+	if (file_exists($disc.DIRECTORY_SEPARATOR.'VIDEO_TS')) {
+		$dvds[] = $disc;
+	}
+	
+}
 
-$eject = false;
+$drives = array_diff($drives, $dvds, EXCLUDED_DRIVES);
 
 foreach ($drives as $drive) {
 	
 	try {
 		
+		exec('dir '.$drive, $output, $error);
+		
+		if ($error !== 0) {
+			continue;
+		}
+		
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+		
+		foreach ($files as $file) {
+			
+			$where = explode(DIRECTORY_SEPARATOR, $file);
+			
+			$file = array_pop($where);
+			
+			$where = implode(DIRECTORY_SEPARATOR, $where);
+			
+			$output = explode('.', $file);
+			
+			$format = end($output);
+			
+			$format = strtolower($format);
+			
+			if (!in_array($format, FILE_FORMATS, true)) {
+				continue;
+			}
+			
+			$output = implode('', $output);
+			
+			$output = file_clearance($output, $format, DIR_AUTOMATIC);
+			
+			rename($where.$file, DIR_AUTOMATIC.$output.$format);
+			
+		}
 		
 	} catch (Exception $e) {
 		
@@ -39,68 +73,48 @@ foreach ($drives as $drive) {
 		
 	}
 	
-	$eject = true;
+}
+
+foreach ($discs as $disc) {
 	
-	foreach ($files as $file) {
+	try {
 		
-		$where = explode(DIRECTORY_SEPARATOR, $file);
+		exec('dir '.$disc, $output, $error);
 		
-		$file = array_pop($where);
-		
-		$where = implode(DIRECTORY_SEPARATOR, $where);
-		
-		$output = explode('.', $file);
-		
-		$format = end($output);
-		
-		$format = strtolower($format);
-		
-		if (!in_array($format, FILE_FORMATS, true)) {
+		if ($error !== 0) {
 			continue;
 		}
 		
-		$output = implode('', $output);
+		$label = shell_exec('vol '.$drive);
 		
-		$output = preg_replace('#[^a-z0-9]+#is', '', $output);
+		$label = shell_clean_up($label);
 		
-		$directory = DIR_WORKING.$output;
+		$label = substr($label[0], 21);
 		
-		if (file_exists($directory)) {
-			
-			$counter = 1;
+		$label = file_clearance($label);
 		
-			while (file_exists($directory.$counter)) {
-				$counter++;
-			}
-			
-			$directory = $directory.$counter;
-			
+		mkdir(DIR_WORKING.$label);
+		
+		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
+		
+		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $drive));
+		
+		$output = preg_split('#found [\d]+ valid title\(s\)#', $output);
+		
+		preg_match_all('#\+ title ([\d]+)\:#', $output, $titles);
+		
+		$titles = $titles[1];
+		
+		foreach ($titles as $title) {
+			shell_exec(sprintf(HANDBRAKE_DVD, $drive, $directory.$title, $title));
 		}
 		
-		mkdir($directory);
+		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$drive);
 		
-		$directory = $directory.DIRECTORY_SEPARATOR;
+	} catch (Exception $e) {
 		
-		rename($where.$file, $directory.$output);
-		
-		shell_exec(sprintf(HANDBRAKE, $directory.$output, $directory.$output));
+		continue;
 		
 	}
-	
-}
-
-if ($eject) {
-	
-	$drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
-	
-	$drives = trim($drives);
-	
-	$drives = str_replace(NEW_LINES, "\n", $drives);
-	
-	$drives = explode("\n", $drives);
-	
-	$drives = array_map('trim', $drives);
-	
-	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$drives[0]);
 	
 }
