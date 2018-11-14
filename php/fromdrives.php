@@ -39,6 +39,8 @@ foreach ($drives as $drive) {
 		
 	}
 	
+	$eject = true;
+	
 	foreach ($files as $file) {
 		
 		$where = explode(DIRECTORY_SEPARATOR, $file);
@@ -88,5 +90,17 @@ foreach ($drives as $drive) {
 }
 
 if ($eject) {
-	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$letter);
+	
+	$drives = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
+	
+	$drives = trim($drives);
+	
+	$drives = str_replace(NEW_LINES, "\n", $drives);
+	
+	$drives = explode("\n", $drives);
+	
+	$drives = array_map('trim', $drives);
+	
+	shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$drives[0]);
+	
 }
