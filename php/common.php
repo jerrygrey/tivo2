@@ -26,7 +26,7 @@ function shell_clean_up ( $output ) {
 	
 	$output = explode("\n", $output);
 	
-	return array_map('trim', $drives);
+	return array_map('trim', $output);
 	
 }
 
