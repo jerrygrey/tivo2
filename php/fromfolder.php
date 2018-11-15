@@ -1,6 +1,6 @@
 <?php
 
-require 'common.php';
+require 'C:\TiVo2\scripts\php\common.php';
 
 try {
 	
