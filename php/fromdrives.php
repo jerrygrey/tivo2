@@ -81,7 +81,7 @@ foreach ($drives as $drive) {
 		
 		foreach ($files as $file) {
 			
-			if (strpos($file, DIRECTORY_SEPARATOR.'.') === false) {
+			if (strpos($file, DIRECTORY_SEPARATOR.'.') !== false) {
 				continue;
 			}
 			
@@ -105,7 +105,7 @@ foreach ($drives as $drive) {
 			
 			$output = file_clearance($output, $format, DIR_AUTOMATIC);
 			
-			rename($where.$file, DIR_AUTOMATIC.$output.'.'.$format);
+			copy($where.$file, DIR_AUTOMATIC.$output.'.'.$format);
 			
 		}
 		
