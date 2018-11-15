@@ -10,7 +10,7 @@ foreach ($discs as $disc) {
 	
 	try {
 		
-		exec('dir '.$disc, $output, $error);
+		exec('dir '.$disc, null, $error);
 		
 		if ($error !== 0) {
 			continue;
@@ -32,9 +32,9 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
-		exec(sprintf(HANDBRAKE_SCAN, $disc), $output);
+		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
 		
-		$output = implode(PHP_EOL, $output);
+		var_dump($output);
 		
 		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
 		
