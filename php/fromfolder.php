@@ -21,20 +21,22 @@ foreach ($files as $file) {
 	
 	$where = implode(DIRECTORY_SEPARATOR, $where);
 	
-	$output = explode('.', $file);
+	$file = explode('.', $file);
 	
-	array_pop($output);
+	$format = array_pop($file);
 	
-	$output = implode('', $output);
+	$format = '.'.$format;
 	
-	$directory = file_clearance($output);
+	$file = implode('.', $file);
+	
+	$directory = file_clearance($file);
 	
 	mkdir(DIR_WORKING.$directory);
 	
 	$directory = DIR_WORKING.$directory.DIRECTORY_SEPARATOR;
 	
-	rename($where.DIRECTORY_SEPARATOR.$file, $directory.$file);
+	rename($where.DIRECTORY_SEPARATOR.$file.$format, $directory.$file.'.original'.$format);
 	
-	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file, $directory.$output));
+	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file.'.original'.$format, $directory.$output));
 	
 }
