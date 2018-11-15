@@ -24,8 +24,6 @@ foreach ($rawdrives as $rawdrive) {
 			
 			case '5':
 				$discs[] = $drive;
-				$drives[] = $drive;
-				break;
 				
 			case '2':
 				$drives[] = $drive;
@@ -63,7 +61,7 @@ foreach ($discs as $disc) {
 }
 
 $drives = array_diff($drives, $dvds, EXCLUDED_DRIVES);
-var_dump($drives, $discs, $dvds);exit;
+
 $eject = false;
 
 foreach ($drives as $drive) {
