@@ -6,11 +6,11 @@ $logicaldisks = shell_exec('wmic logicaldisk get deviceid,drivetype');
 
 $logicaldisks = shell_clean_up($logicaldisks);
 
-$cdroms = shell_exec('wmic cdrom get caption');
+$cdroms = shell_exec('wmic cdrom get deviceid');
 
 $cdroms = shell_clean_up($cdroms);
 
-$diskdrives = shell_exec('wmic diskdrive get caption');
+$diskdrives = shell_exec('wmic diskdrive get deviceid');
 
 $diskdrives = shell_clean_up($diskdrives);
 
