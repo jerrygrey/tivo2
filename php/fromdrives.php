@@ -27,7 +27,7 @@ foreach ($discs as $disc) {
 }
 
 $drives = array_diff($drives, $dvds, EXCLUDED_DRIVES);
-
+var_dump($drives, $dvds, EXCLUDED_DRIVES);exit;
 $eject = false;
 
 foreach ($drives as $drive) {
@@ -55,7 +55,7 @@ foreach ($drives as $drive) {
 			
 			$output = explode('.', $file);
 			
-			$format = end($output);
+			$format = array_pop($output);
 			
 			$format = strtolower($format);
 			
@@ -67,7 +67,7 @@ foreach ($drives as $drive) {
 			
 			$output = file_clearance($output, $format, DIR_AUTOMATIC);
 			
-			rename($where.$file, DIR_AUTOMATIC.$output.$format);
+			rename($where.$file, DIR_AUTOMATIC.$output.'.'.$format);
 			
 		}
 		
