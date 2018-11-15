@@ -38,15 +38,3 @@ foreach ($files as $file) {
 	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file, $directory.$output));
 	
 }
-
-if (!empty($files)) {
-	
-	$discs = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
-	
-	$discs = shell_clean_up($discs);
-	
-	foreach ($discs as $disc) {
-		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
-	}
-	
-}
