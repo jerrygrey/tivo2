@@ -18,8 +18,6 @@ function shell_clean_up ( $output ) {
 	
 	$output = strtoupper($output);
 	
-	$output = substr($output, 7);
-	
 	$output = trim($output);
 	
 	$output = str_replace(NEW_LINES, "\n", $output);
