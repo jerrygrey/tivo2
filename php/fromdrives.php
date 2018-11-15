@@ -2,6 +2,23 @@
 
 require 'C:\TiVo2\scripts\php\common.php';
 
+$logicaldisks = shell_exec('wmic logicaldisk get deviceid,drivetype');
+
+$logicaldisks = shell_clean_up($logicaldisks);
+
+$cdroms = shell_exec('wmic cdrom get caption');
+
+$cdroms = shell_clean_up($cdroms);
+
+$diskdrives = shell_exec('wmic diskdrive get caption');
+
+$diskdrives = shell_clean_up($diskdrives);
+
+var_dump($logicaldisks, $cdroms, $diskdrives);exit;
+
+
+
+
 $drives = shell_exec('wmic logicaldisk get caption');
 
 $drives = shell_clean_up($drives);
