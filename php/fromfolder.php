@@ -37,6 +37,6 @@ foreach ($files as $file) {
 	
 	rename($where.DIRECTORY_SEPARATOR.$file.$format, $directory.$file.'.original'.$format);
 	
-	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file.'.original'.$format, $directory.$output));
+	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file.'.original'.$format, $directory.$file));
 	
 }
