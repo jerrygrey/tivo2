@@ -1,6 +1,6 @@
 <?php
 
-require 'common.php';
+require 'C:\TiVo2\scripts\php\common.php';
 
 $drives = shell_exec('wmic logicaldisk get caption');
 
