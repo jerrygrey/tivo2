@@ -14,7 +14,7 @@ $dvds = [];
 
 foreach ($discs as $disc) {
 	
-	exec('dir '.$drive, $output, $error);
+	exec('dir '.$disc, $output, $error);
 	
 	if ($error !== 0) {
 		continue;
@@ -28,6 +28,8 @@ foreach ($discs as $disc) {
 
 $drives = array_diff($drives, $dvds, EXCLUDED_DRIVES);
 
+$eject = false;
+
 foreach ($drives as $drive) {
 	
 	try {
@@ -40,6 +42,8 @@ foreach ($drives as $drive) {
 		
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+		
+		$eject = true;
 		
 		foreach ($files as $file) {
 			
@@ -71,6 +75,16 @@ foreach ($drives as $drive) {
 		
 		continue;
 		
+	}
+	
+}
+
+if ($eject) {
+	
+	$discs = array_diff($discs, $dvds, EXCLUDED_DRIVES);
+	
+	foreach ($discs as $disc) {
+		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
 	}
 	
 }
