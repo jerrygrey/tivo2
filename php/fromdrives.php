@@ -2,30 +2,47 @@
 
 require 'C:\TiVo2\scripts\php\common.php';
 
-$logicaldisks = shell_exec('wmic logicaldisk get deviceid,drivetype');
+$rawdrives = shell_exec('wmic logicaldisk get deviceid,drivetype');
 
-$logicaldisks = shell_clean_up($logicaldisks);
+$rawdrives = shell_clean_up($rawdrives);
 
-$cdroms = shell_exec('wmic cdrom get deviceid');
+array_shift($rawdrives);
 
-$cdroms = shell_clean_up($cdroms);
+$drives = [];
+$discs = [];
 
-$diskdrives = shell_exec('wmic diskdrive get deviceid');
-
-$diskdrives = shell_clean_up($diskdrives);
-
-var_dump($logicaldisks, $cdroms, $diskdrives);exit;
-
-
-
-
-$drives = shell_exec('wmic logicaldisk get caption');
-
-$drives = shell_clean_up($drives);
-
-$discs = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdrives.vbs'));
-
-$discs = shell_clean_up($discs);
+foreach ($rawdrives as $rawdrive) {
+	
+	try {
+		
+		[$drive, $type] = explode(':', $rawdrive);
+		
+		$drive = trim($drive);
+		$type = trim($type);
+		
+		switch ($type) {
+			
+			case '5':
+				$discs[] = $drive;
+				
+			case '2':
+				$drives[] = $drive;
+				break;
+			
+			default:
+				continue;
+			
+		}
+		
+		
+		
+	} catch (Exception $e) {
+		
+		continue;
+		
+	}
+	
+}
 
 $dvds = [];
 
@@ -44,7 +61,7 @@ foreach ($discs as $disc) {
 }
 
 $drives = array_diff($drives, $dvds, EXCLUDED_DRIVES);
-var_dump($drives, $dvds, EXCLUDED_DRIVES);exit;
+var_dump($drives, $discs, $dvds);exit;
 $eject = false;
 
 foreach ($drives as $drive) {
