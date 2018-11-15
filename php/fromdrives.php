@@ -47,6 +47,10 @@ foreach ($drives as $drive) {
 		
 		foreach ($files as $file) {
 			
+			if (strpos($file, DIRECTORY_SEPARATOR.'.') === false) {
+				continue;
+			}
+			
 			$where = explode(DIRECTORY_SEPARATOR, $file);
 			
 			$file = array_pop($where);
