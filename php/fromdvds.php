@@ -34,9 +34,13 @@ foreach ($discs as $disc) {
 		
 		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
 		
-		$output = preg_split('#found [\d]+ valid title\(s\)#', $output);
+		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
 		
-		preg_match_all('#\+ title ([\d]+)\:#', $output, $titles);
+		if (count($output) < 2) {
+			continue;
+		}
+		
+		preg_match_all('#\+ title ([\d]+)\:#is', $output[1], $titles);
 		
 		$titles = $titles[1];
 		
