@@ -17,7 +17,7 @@ foreach ($rawdrives as $rawdrive) {
 		
 		[$drive, $type] = explode(':', $rawdrive);
 		
-		$drive = trim($drive);
+		$drive = trim($drive).':';
 		$type = trim($type);
 		
 		switch ($type) {
