@@ -23,7 +23,7 @@ foreach ($files as $file) {
 	
 	$output = explode('.', $file);
 	
-	end($output);
+	array_pop($output);
 	
 	$output = implode('', $output);
 	
@@ -33,7 +33,7 @@ foreach ($files as $file) {
 	
 	$directory = DIR_WORKING.$directory.DIRECTORY_SEPARATOR;
 	
-	rename($where.$file, $directory.$file);
+	rename($where.DIRECTORY_SEPARATOR.$file, $directory.$file);
 	
 	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file, $directory.$output));
 	
