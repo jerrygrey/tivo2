@@ -24,6 +24,8 @@ foreach ($rawdrives as $rawdrive) {
 			
 			case '5':
 				$discs[] = $drive;
+				$drives[] = $drive;
+				break;
 				
 			case '2':
 				$drives[] = $drive;
