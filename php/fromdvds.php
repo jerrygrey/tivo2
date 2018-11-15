@@ -20,7 +20,7 @@ foreach ($discs as $disc) {
 			continue;
 		}
 		
-		$label = shell_exec('vol '.$drive);
+		$label = shell_exec('vol '.$disc);
 		
 		$label = shell_clean_up($label);
 		
@@ -32,7 +32,7 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
-		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $drive));
+		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
 		
 		$output = preg_split('#found [\d]+ valid title\(s\)#', $output);
 		
@@ -41,10 +41,10 @@ foreach ($discs as $disc) {
 		$titles = $titles[1];
 		
 		foreach ($titles as $title) {
-			shell_exec(sprintf(HANDBRAKE_DVD, $drive, $directory.$title, $title));
+			shell_exec(sprintf(HANDBRAKE_DVD, $disc, $directory.$title, $title));
 		}
 		
-		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$drive);
+		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
 		
 	} catch (Exception $e) {
 		
