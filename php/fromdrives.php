@@ -105,7 +105,7 @@ foreach ($drives as $drive) {
 			
 			$output = file_clearance($output, $format, DIR_AUTOMATIC);
 			
-			copy($where.$file, DIR_AUTOMATIC.$output.'.'.$format);
+			copy($where.DIRECTORY_SEPARATOR.$file, DIR_AUTOMATIC.$output.'.'.$format);
 			
 		}
 		
