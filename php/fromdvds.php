@@ -36,6 +36,8 @@ foreach ($discs as $disc) {
 		
 		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
 		
+		var_dump($output);exit;
+		
 		if (count($output) < 2) {
 			continue;
 		}
