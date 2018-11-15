@@ -80,7 +80,7 @@ foreach ($drives as $drive) {
 		$eject = true;
 		
 		foreach ($files as $file) {
-			var_dump('------------------------', $file, strpos($file, DIRECTORY_SEPARATOR.'.'));
+			
 			if (strpos($file, DIRECTORY_SEPARATOR.'.') !== false) {
 				continue;
 			}
@@ -105,7 +105,7 @@ foreach ($drives as $drive) {
 			
 			$output = file_clearance($output, $format, DIR_AUTOMATIC);
 			
-			var_dump($where.DIRECTORY_SEPARATOR.$file, DIR_AUTOMATIC.$output.'.'.$format);
+			var_dump('--',$where.DIRECTORY_SEPARATOR.$file, DIR_AUTOMATIC.$output.'.'.$format);
 			
 			/*copy($where.DIRECTORY_SEPARATOR.$file, DIR_AUTOMATIC.$output.'.'.$format);*/
 			
