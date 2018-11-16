@@ -36,6 +36,8 @@ foreach ($discs as $disc) {
 		
 		exec(sprintf(HANDBRAKE_SCAN, $disc), $output);
 		
+		$output = implode(PHP_EOL, $output);
+		
 		var_dump($output);
 		
 		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
