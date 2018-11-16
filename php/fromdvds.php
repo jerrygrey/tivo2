@@ -50,7 +50,7 @@ foreach ($discs as $disc) {
 		}
 		
 		preg_match_all('#\+ title ([\d]+)\:#is', $output[1], $titles);
-		
+		var_dump($titles);exit;
 		$titles = $titles[1];
 		
 		echo PHP_EOL.'Ripping DVD...';
