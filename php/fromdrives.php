@@ -74,6 +74,8 @@ foreach ($drives as $drive) {
 			continue;
 		}
 		
+		unset($output, $error);
+		
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 		
