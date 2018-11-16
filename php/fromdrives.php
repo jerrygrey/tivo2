@@ -43,7 +43,7 @@ foreach ($rawdrives as $rawdrive) {
 	}
 	
 }
-
+var_dump($rawdrives, $drives, $discs, '---');
 $dvds = [];
 
 foreach ($discs as $disc) {
