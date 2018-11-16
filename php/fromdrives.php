@@ -81,6 +81,8 @@ foreach ($drives as $drive) {
 		
 		$eject = true;
 		
+		echo PHP_EOL.'Media inserted...';
+		
 		foreach ($files as $file) {
 			
 			if (strpos($file, DIRECTORY_SEPARATOR.'.') !== false) {
@@ -107,7 +109,11 @@ foreach ($drives as $drive) {
 			
 			$output = file_clearance($output, $format, DIR_AUTOMATIC);
 			
+			echo PHP_EOL.'Copying '.$file.'...';
+			
 			copy($where.DIRECTORY_SEPARATOR.$file, DIR_AUTOMATIC.$output.'.'.$format);
+			
+			echo ' Done!';
 			
 		}
 		
@@ -120,6 +126,8 @@ foreach ($drives as $drive) {
 }
 
 if ($eject) {
+	
+	echo PHP_EOL.'All done, ejecting...';
 	
 	$discs = array_diff($discs, $dvds, EXCLUDED_DRIVES);
 	
