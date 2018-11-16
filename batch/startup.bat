@@ -6,7 +6,7 @@ ping -n 2 127.0.0.1 >nul
 :check
 
 cd C:\TiVo2\scripts
-git pull origin master >nul
+git pull origin master >nul 2>&1
 
 ping -n 6 127.0.0.1 >nul
 
