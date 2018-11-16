@@ -48,9 +48,9 @@ $dvds = [];
 
 foreach ($discs as $disc) {
 	
-	exec("dir {$disc} 2>&1", $output, $error);
-	var_dump($output, $error);
-	if ($error !== 0) {
+	$output = shell_exec("dir {$disc} 2>&1");
+	
+	if (strpos($output, 'not ready') !== false) {
 		continue;
 	}
 	
@@ -68,9 +68,9 @@ foreach ($drives as $drive) {
 	
 	try {
 		
-		exec('dir '.$drive, $output, $error);
-		var_dump($output, $error);
-		if ($error !== 0) {
+		$output = shell_exec("dir {$disc} 2>&1");
+		var_dump($disc,$output,strpos($output, 'not ready'));
+		if (strpos($output, 'not ready') !== false) {
 			continue;
 		}
 		continue;
