@@ -15,6 +15,8 @@ try {
 
 foreach ($files as $file) {
 	
+	echo PHP_EOL.'Found files in folder...';
+	
 	$where = explode(DIRECTORY_SEPARATOR, $file);
 	
 	$file = array_pop($where);
@@ -35,8 +37,12 @@ foreach ($files as $file) {
 	
 	$directory = DIR_WORKING.$directory.DIRECTORY_SEPARATOR;
 	
+	echo PHP_EOL.'Converting '.$file.$format.'...';
+	
 	rename($where.DIRECTORY_SEPARATOR.$file.$format, $directory.$file.'.original'.$format);
 	
 	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file.'.original'.$format, $directory.$file));
+	
+	echo ' Done!';
 	
 }
