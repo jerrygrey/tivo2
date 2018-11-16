@@ -34,7 +34,7 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
-		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
+		exec(sprintf(HANDBRAKE_SCAN, $disc), $output);
 		
 		var_dump($output);
 		
