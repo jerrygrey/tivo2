@@ -74,12 +74,12 @@ foreach ($drives as $drive) {
 			continue;
 		}
 		
-		$file = DIR_TEMPORARY.'drive-'.substr($drive, 0, 1);
+		$temp = DIR_TEMPORARY.'drive-'.substr($drive, 0, 1);
 		$hash = hash('sha1', $output);
 		
-		if (file_exists($file)) {
+		if (file_exists($temp)) {
 			
-			$contents = file_get_contents($file);
+			$contents = file_get_contents($temp);
 			
 			$contents = explode('-', $contents);
 			
@@ -88,12 +88,10 @@ foreach ($drives as $drive) {
 			if ($contents[0] >= (time()-(60*60)) and $contents[1] === $hash) {
 				continue;
 			} else {
-				unlink($file);
+				unlink($temp);
 			}
 			
 		}
-		
-		file_put_contents($file, time().'-'.$hash);
 		
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
@@ -135,6 +133,8 @@ foreach ($drives as $drive) {
 			echo ' Done!';
 			
 		}
+		
+		file_put_contents($temp, time().'-'.$hash);
 		
 	} catch (Exception $e) {
 		
