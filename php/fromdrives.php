@@ -43,7 +43,7 @@ foreach ($rawdrives as $rawdrive) {
 	}
 	
 }
-var_dump($rawdrives, $drives, $discs, '---');
+
 $dvds = [];
 
 foreach ($discs as $disc) {
@@ -68,8 +68,8 @@ foreach ($drives as $drive) {
 	
 	try {
 		
-		$output = shell_exec("dir {$disc} 2>&1");
-		var_dump($disc,$output,strpos($output, 'not ready'));
+		$output = shell_exec("dir {$drive} 2>&1");
+		var_dump($drive,$output,strpos($output, 'not ready'));
 		if (strpos($output, 'not ready') !== false) {
 			continue;
 		}
