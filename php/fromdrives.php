@@ -69,11 +69,11 @@ foreach ($drives as $drive) {
 	try {
 		
 		$output = shell_exec("dir {$drive} 2>&1");
-		var_dump($drive,$output,strpos($output, 'not ready'));
+		
 		if (strpos($output, 'not ready') !== false) {
 			continue;
 		}
-		continue;
+		
 		$file = DIR_TEMPORARY.'drive-'.substr($drive, 0, 1);
 		$hash = hash('sha1', $output);
 		
