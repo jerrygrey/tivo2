@@ -74,7 +74,26 @@ foreach ($drives as $drive) {
 			continue;
 		}
 		
-		unset($output, $error);
+		$file = DIR_TEMPORARY.'drive-'.substr($drive, 0, 1);
+		$hash = hash('sha1', $output);
+		
+		if (file_exists($file)) {
+			
+			$contents = file_get_contents($file);
+			
+			$contents = explode('-', $contents);
+			
+			$contents[0] = intval($contents[0]);
+			
+			if ($contents[0] < (time()-(60*60)) and $contents[1] === $hash) {
+				continue;
+			} else {
+				unlink($file);
+			}
+			
+		}
+		
+		file_put_contents($file, time().'-'.$hash);
 		
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
