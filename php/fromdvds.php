@@ -10,13 +10,11 @@ foreach ($discs as $disc) {
 	
 	try {
 		
-		exec('dir '.$disc, $output, $error);
+		$output = shell_exec("dir {$disc} 2>&1");
 		
-		if ($error !== 0) {
+		if (strpos($output, 'not ready') !== false) {
 			continue;
 		}
-		
-		unset($output, $error);
 		
 		if (!file_exists($disc.DIRECTORY_SEPARATOR.'VIDEO_TS')) {
 			continue;
