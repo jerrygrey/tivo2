@@ -2,7 +2,7 @@
 
 require 'C:\TiVo2\scripts\php\common.php';
 
-$rawdrives = shell_exec('wmic logicaldisk get deviceid,drivetype');
+$rawdrives = shell_exec('wmic logicaldisk get deviceid,drivetype 2>&1');
 
 $rawdrives = shell_clean_up($rawdrives);
 
@@ -48,8 +48,8 @@ $dvds = [];
 
 foreach ($discs as $disc) {
 	
-	exec('dir '.$disc, $output, $error);
-	
+	exec("dir {$disc} 2>&1", $output, $error);
+	var_dump($output, $error);
 	if ($error !== 0) {
 		continue;
 	}
@@ -69,11 +69,11 @@ foreach ($drives as $drive) {
 	try {
 		
 		exec('dir '.$drive, $output, $error);
-		
+		var_dump($output, $error);
 		if ($error !== 0) {
 			continue;
 		}
-		
+		continue;
 		$file = DIR_TEMPORARY.'drive-'.substr($drive, 0, 1);
 		$hash = hash('sha1', $output);
 		
