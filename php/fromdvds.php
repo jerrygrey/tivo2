@@ -53,7 +53,7 @@ foreach ($discs as $disc) {
 		
 		$titles = $titles[1];
 		
-		echo PHP_EOL.'Ripping DVDs...';
+		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
 			shell_exec(sprintf(HANDBRAKE_DVD, $disc, $directory.$title, $title));
