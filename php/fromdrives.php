@@ -84,7 +84,7 @@ foreach ($drives as $drive) {
 			$contents = explode('-', $contents);
 			
 			$contents[0] = intval($contents[0]);
-			
+			var_dump($contents, $contents[0] < (time()-(60*60)), $contents[1] === $hash);
 			if ($contents[0] < (time()-(60*60)) and $contents[1] === $hash) {
 				continue;
 			} else {
@@ -94,7 +94,7 @@ foreach ($drives as $drive) {
 		}
 		
 		file_put_contents($file, time().'-'.$hash);
-		
+		continue;
 		$directory = new RecursiveDirectoryIterator($drive.DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS);
 		$files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 		
