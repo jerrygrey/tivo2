@@ -22,7 +22,21 @@ foreach ($discs as $disc) {
 			continue;
 		}
 		
-		echo PHP_EOL.'Disc inserted...';
+		echo PHP_EOL.'Found DVD, scanning...';
+		
+		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
+		
+		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
+		
+		if (count($output) < 2) {
+			
+			echo PHP_EOL.'Nothing to do, ejecting...';
+			
+			shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
+			
+			continue;
+			
+		}
 		
 		$label = shell_exec('vol '.$disc);
 		
@@ -36,21 +50,8 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
-		echo PHP_EOL.'Scanning disc...';
-		
-		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
-		
-		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
-		
-		if (count($output) < 2) {
-		
-			echo PHP_EOL.'Nothing to do, ejecting...';
-			continue;
-			
-		}
-		
 		preg_match_all('#\+ title ([\d]+)\:#is', $output[1], $titles);
-		var_dump($titles);exit;
+		
 		$titles = $titles[1];
 		
 		echo PHP_EOL.'Ripping DVD...';
