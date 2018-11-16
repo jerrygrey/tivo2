@@ -1,14 +1,14 @@
 @echo off
 SetLocal EnableDelayedExpansion
 
-ping -n 2 127.0.0.1 > nul
+ping -n 2 127.0.0.1 >nul
 
 :check
 
 cd C:\TiVo2\scripts
-git pull origin master
+git pull origin master >nul
 
-ping -n 6 127.0.0.1 > nul
+ping -n 6 127.0.0.1 >nul
 
 C:\TiVo2\php\php.exe C:\TiVo2\scripts\php\fromdrives.php
 C:\TiVo2\php\php.exe C:\TiVo2\scripts\php\fromdvds.php
