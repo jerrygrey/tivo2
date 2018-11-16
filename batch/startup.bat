@@ -1,7 +1,7 @@
 @echo off
 SetLocal EnableDelayedExpansion
 
-ping -n 2 127.0.0.1 >nul
+ping -n 31 127.0.0.1 >nul
 
 :check
 
