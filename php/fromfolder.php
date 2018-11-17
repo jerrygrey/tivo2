@@ -13,9 +13,13 @@ try {
 	
 }
 
-foreach ($files as $file) {
+if (!empty($files)) {
 	
 	echo PHP_EOL.'Found files in folder...';
+	
+}
+
+foreach ($files as $file) {
 	
 	$where = explode(DIRECTORY_SEPARATOR, $file);
 	
@@ -37,11 +41,13 @@ foreach ($files as $file) {
 	
 	$directory = DIR_WORKING.$directory.DIRECTORY_SEPARATOR;
 	
+	$where = $where.DIRECTORY_SEPARATOR;
+	
 	echo PHP_EOL.'Converting '.$file.$format.'...';
 	
-	rename($where.DIRECTORY_SEPARATOR.$file.$format, $directory.$file.'.original'.$format);
+	shell_exec(sprintf(HANDBRAKE_FILE, $where.$file.$format, $directory.$file));
 	
-	shell_exec(sprintf(HANDBRAKE_FILE, $directory.$file.'.original'.$format, $directory.$file));
+	rename($where.$file.$format, $directory.$file.'.original'.$format);
 	
 	echo ' Done!';
 	
