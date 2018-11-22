@@ -48,6 +48,8 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
+		file_put_contents($directory.'handbrake.log', var_export($output, true));
+		
 		preg_match_all('#\+ title ([\d]+)\:#is', $output[1], $titles);
 		
 		$titles = $titles[1];
