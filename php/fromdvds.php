@@ -79,7 +79,7 @@ foreach ($discs as $disc) {
 			];
 			
 		}
-		var_dump($titles);exit;
+		
 		$types = [
 			'half' => 0,
 			'hour' => 0,
@@ -132,7 +132,7 @@ foreach ($discs as $disc) {
 			$allowed = ':hour:';
 			
 		}
-		
+		var_dump($titles,$types,$allowed);exit;
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
