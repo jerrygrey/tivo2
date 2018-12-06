@@ -50,7 +50,9 @@ foreach ($discs as $disc) {
 		
 		file_put_contents($directory.'handbrake.log', var_export($output, true));
 		
-		preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
+		$output = preg_split('#\+ title ([\d]+):#Uis', $output[1]);
+		
+		var_dump($output);exit;
 		
 		$titles = [];
 		
@@ -93,7 +95,7 @@ foreach ($discs as $disc) {
 				
 				$titles[$id]['type'] = 'skip';
 				
-			} else if ($id <= (count($titles)-2)
+			} else if ($id < (count($titles)-2)
 				   	and (abs($titles[$id+1]['time']+$titles[$id+2]['time'])-$title['time']) < 10) {
 				
 				$titles[$id]['type'] = 'skip';
@@ -132,7 +134,7 @@ foreach ($discs as $disc) {
 			$allowed = ':hour:';
 			
 		}
-		var_dump($titles,$types,$allowed);exit;
+		
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
