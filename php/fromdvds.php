@@ -51,7 +51,7 @@ foreach ($discs as $disc) {
 		file_put_contents($directory.'handbrake.log', var_export($output, true));
 		
 		preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
-		var_dump($output);exit;
+		
 		$titles = [];
 		
 		$total_not_first = 0;
@@ -79,7 +79,7 @@ foreach ($discs as $disc) {
 			];
 			
 		}
-		
+		var_dump($titles);exit;
 		$types = [
 			'half' => 0,
 			'hour' => 0,
