@@ -13,15 +13,17 @@ try {
 	
 }
 
-var_dump($files);exit;
-
-if (!empty($files)) {
-	
-	echo PHP_EOL.'Found files in folder...';
-	
-}
+$alert = false;
 
 foreach ($files as $file) {
+	
+	if (!$alert) {
+		
+		echo PHP_EOL.'Found files in folder...';
+		
+		$alert = true;
+		
+	}
 	
 	$where = explode(DIRECTORY_SEPARATOR, $file);
 	
