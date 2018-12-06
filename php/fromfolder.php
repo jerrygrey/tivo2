@@ -13,6 +13,8 @@ try {
 	
 }
 
+var_dump($files);exit;
+
 if (!empty($files)) {
 	
 	echo PHP_EOL.'Found files in folder...';
