@@ -132,7 +132,7 @@ foreach ($discs as $disc) {
 			$allowed = ':hour:';
 			
 		}
-		var_dump($titles,$types,$allowed);exit;
+		
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
