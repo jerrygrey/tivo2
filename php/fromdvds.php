@@ -50,66 +50,9 @@ foreach ($discs as $disc) {
 		
 		file_put_contents($directory.'handbrake.log', var_export($output, true));
 		
-		$output = explode("\n", $output[1]);
+		preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
 		
 		$titles = [];
-		
-		$position = -1;
-		$index = -1;
-		$parent = null;
-		
-		while (!empty($output[++$position])) {
-			
-			if ($output[$position][0] === '+') {
-				
-				$current++;
-				
-				$number = substr($output[$position],8,1);
-				$number = intval($number);
-				
-				$titles[$index]['title'] = $number;
-				
-			} else if ($output[$position][2] === '+') {
-				
-				if (strpos($output[$position], ', ') !== false) {
-					
-					$raw = explode(', ', $output[$position]);
-					
-					foreach ($raw as $item) {
-						
-						$item = explode(': ', $item, 2);
-						
-						$titles[$index][$item[0]] = $item[1] ?? null;
-						
-					}
-					
-				} else {
-					
-					$raw = explode(': ', $output[$position], 2);
-					
-					$raw[1] = $raw[1] ?? [];
-					
-					while ($output[$position+1][4] === '+') {
-						$raw[1][] = substr($output[++$position], 6);
-					}
-					
-					$titles[$index][$raw[0]] = $raw[1];
-					
-				}
-				
-			} else {
-				
-				// do nothing
-				
-			}
-			
-		}
-		
-		var_dump($titles);exit;
-		
-		$output = preg_split('#\+ title ([\d]+):#Uis', $output[1]);
-		
-		
 		
 		$total_not_first = 0;
 		
@@ -136,7 +79,7 @@ foreach ($discs as $disc) {
 			];
 			
 		}
-		
+		var_dump($titles);exit;
 		$types = [
 			'half' => 0,
 			'hour' => 0,
@@ -189,7 +132,7 @@ foreach ($discs as $disc) {
 			$allowed = ':hour:';
 			
 		}
-		
+		var_dump($titles,$types,$allowed);exit;
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
