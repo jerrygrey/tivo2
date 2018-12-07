@@ -79,7 +79,7 @@ foreach ($discs as $disc) {
 			];
 			
 		}
-		var_dump($titles);exit;
+		
 		$types = [
 			'half' => 0,
 			'hour' => 0,
