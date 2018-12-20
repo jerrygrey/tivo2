@@ -141,7 +141,7 @@ foreach ($discs as $disc) {
 				continue;
 			}
 			
-			shell_exec(sprintf(HANDBRAKE_DVD, $disc, $directory.$title['number'], $title['number']));
+			shell_exec(sprintf(HANDBRAKE_DVD, $disc, $directory.$title['number'], $label.'t'.$title['number']));
 			
 		}
 		
