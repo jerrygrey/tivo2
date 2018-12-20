@@ -98,7 +98,7 @@ foreach ($discs as $disc) {
 				
 				$titles[$id]['type'] = 'skip';
 				
-			} else if ($title['time'] < (24*60)) {
+			} else if ($title['time'] < (26*60)) {
 				
 				$types['half']++;
 				$titles[$id]['type'] = 'half';
