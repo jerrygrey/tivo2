@@ -145,11 +145,11 @@ foreach ($discs as $disc) {
 			
 			$log = shell_exec(sprintf(
 				HANDBRAKE_DVD, $disc,
-				$directory.$title['number'],
-				$label.'t'.$title['number']
+				$directory.$label.'t'.$title['number'],
+				$title['number']
 			));
 			
-			file_put_contents($directory.'handbrake.log', $log.PHP_EOL, FILE_APPEND);
+			file_put_contents($directory.$label.'t'.$title['number'].'.log', $log);
 			
 		}
 		
