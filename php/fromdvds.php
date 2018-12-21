@@ -48,7 +48,7 @@ foreach ($discs as $disc) {
 		
 		$directory = DIR_WORKING.$label.DIRECTORY_SEPARATOR;
 		
-		file_put_contents($directory.'handbrake.log', var_export($output, true));
+		file_put_contents($directory.'dvd.log', var_export($output,true));
 		
 		preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
 		
@@ -104,12 +104,12 @@ foreach ($discs as $disc) {
 				$titles[$id]['type'] = 'half';
 				
 			} else if ($title['time'] > (37*60) and $title['time'] < (45*60)) {
-
+				
 				$types['hour']++;
 				$titles[$id]['type'] = 'hour';
 				
 			} else if ($title['time'] > (60*60) and $title['time'] < (3*60*60)) {
-
+				
 				$types['movies']++;
 				$titles[$id]['type'] = 'movie';
 				
@@ -133,7 +133,7 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		file_put_contents($directory.'handbrake.log', var_export([$types,$allowed,$titles], true));
+		file_put_contents($directory.'filter.log', var_export([$allowed,$types,$titles],true));
 		
 		echo PHP_EOL.'Ripping DVD...';
 		
@@ -143,7 +143,13 @@ foreach ($discs as $disc) {
 				continue;
 			}
 			
-			shell_exec(sprintf(HANDBRAKE_DVD, $disc, $directory.$title['number'], $label.'t'.$title['number']));
+			$log = shell_exec(sprintf(
+				HANDBRAKE_DVD, $disc,
+				$directory.$title['number'],
+				$label.'t'.$title['number']
+			));
+			
+			file_put_contents($directory.'handbrake.log', $log.PHP_EOL, FILE_APPEND);
 			
 		}
 		
