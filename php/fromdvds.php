@@ -133,6 +133,8 @@ foreach ($discs as $disc) {
 			
 		}
 		
+		file_put_contents($directory.'handbrake.log', var_export([$types,$allowed,$titles], true));
+		
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
