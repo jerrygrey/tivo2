@@ -1,7 +1,5 @@
 <?php
 
-echo 'fromdvds';
-
 require 'D:\TiVo2\scripts\php\common.php';
 
 $discs = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdiscs.vbs'));
