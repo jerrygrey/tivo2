@@ -57,3 +57,5 @@ function file_clearance ( $name, $format = '', $directory = DIR_WORKING ) {
 	return $name;
 	
 }
+
+echo 'endcommon';
