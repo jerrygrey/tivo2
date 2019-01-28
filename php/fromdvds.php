@@ -1,6 +1,6 @@
 <?php
 
-require 'C:\TiVo2\scripts\php\common.php';
+require 'D:\TiVo2\scripts\php\common.php';
 
 $discs = shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'listdiscs.vbs'));
 
