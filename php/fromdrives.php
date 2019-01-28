@@ -1,5 +1,7 @@
 <?php
 
+echo 'fromdrives';
+
 require 'D:\TiVo2\scripts\php\common.php';
 
 $rawdrives = shell_exec('wmic logicaldisk get deviceid,drivetype 2>&1');
