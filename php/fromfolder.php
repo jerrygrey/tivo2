@@ -1,5 +1,7 @@
 <?php
 
+echo 'fromfolder';
+
 require 'D:\TiVo2\scripts\php\common.php';
 
 try {
