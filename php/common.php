@@ -4,16 +4,21 @@ define('FILE_FORMATS', ['avi','mp4','m4v','mkv','mpg','mov']);
 define('NEW_LINES', ["\r\n", "\n\r", "\n", "\r"]);
 define('EXCLUDED_DRIVES', ['C:','D:']);
 
-define('DIR_SCRIPTS', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
-define('DIR_TEMPORARY', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'temporary'.DIRECTORY_SEPARATOR);
-define('DIR_AUTOMATIC', 'D:'.DIRECTORY_SEPARATOR.'Automatic'.DIRECTORY_SEPARATOR);
-define('DIR_WORKING', 'D:'.DIRECTORY_SEPARATOR.'Working'.DIRECTORY_SEPARATOR);
+define('WORKING_DRIVE', 'D:'.DIRECTORY_SEPARATOR);
+define('WINDOWS_DRIVE', 'D:'.DIRECTORY_SEPARATOR);
 
-define('HANDBRAKE_FILE', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --main-feature -e x265 --no-dvdnav --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
-define('HANDBRAKE_SCAN', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" --title 0 -e x265 --min-duration 1200 --no-dvdnav --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
-define('HANDBRAKE_DVD', 'C:'.DIRECTORY_SEPARATOR.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe -i "%s" -o "%s.m4v" --title %d -e x265 --no-dvdnav --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
+define('DIR_SCRIPTS', WORKING_DRIVE.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'vbscripts'.DIRECTORY_SEPARATOR);
+define('DIR_TEMPORARY', WORKING_DRIVE.'TiVo2'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'temporary'.DIRECTORY_SEPARATOR);
+define('DIR_AUTOMATIC', WORKING_DRIVE.'Automatic'.DIRECTORY_SEPARATOR);
+define('DIR_WORKING', WORKING_DRIVE.'Working'.DIRECTORY_SEPARATOR);
 
-define('CSCRIPT', 'C:'.DIRECTORY_SEPARATOR.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
+define('HANDBRAKE', WORKING_DRIVE.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe');
+
+define('HANDBRAKE_FILE', HANDBRAKE.' -i "%s" -o "%s.m4v" --main-feature -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
+define('HANDBRAKE_SCAN', HANDBRAKE.' -i "%s" --title 0 -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
+define('HANDBRAKE_DVD', HANDBRAKE.' -i "%s" -o "%s.m4v" --title %d -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
+
+define('CSCRIPT', WINDOWS_DRIVE.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
 
 function shell_clean_up ( $output ) {
 	
