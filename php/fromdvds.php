@@ -123,7 +123,7 @@ foreach ($discs as $disc) {
 		
 		$allowed = ':half:hour:movie:other:';
 		
-		if ($types['half'] > 3 and $types['hour'] < 2) {
+		/*if ($types['half'] > 3 and $types['hour'] < 2) {
 			
 			$allowed = ':half:hour:';
 			
@@ -131,7 +131,7 @@ foreach ($discs as $disc) {
 			
 			$allowed = ':hour:';
 			
-		}
+		}*/
 		
 		file_put_contents($directory.'filter.log', var_export([$allowed,$types,$titles],true));
 		
