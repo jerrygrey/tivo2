@@ -133,6 +133,173 @@ foreach ($discs as $disc) {
 			
 		}
 		
+		if ($label === 'GHOSTWHISPERERS3D4GBR') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '1', 'type' => 'hour'],
+				['number' => '2', 'type' => 'hour'],
+				['number' => '3', 'type' => 'hour'],
+				['number' => '4', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40AAT1') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '25', 'type' => 'hour'],
+				['number' => '54', 'type' => 'hour'],
+				['number' => '69', 'type' => 'hour'],
+				['number' => '78', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUT2') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '27', 'type' => 'hour'],
+				['number' => '45', 'type' => 'hour'],
+				['number' => '69', 'type' => 'hour'],
+				['number' => '82', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUT3') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '29', 'type' => 'hour'],
+				['number' => '45', 'type' => 'hour'],
+				['number' => '66', 'type' => 'hour'],
+				['number' => '78', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUT3') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '29', 'type' => 'hour'],
+				['number' => '45', 'type' => 'hour'],
+				['number' => '66', 'type' => 'hour'],
+				['number' => '78', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUG4') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '16', 'type' => 'hour'],
+				['number' => '50', 'type' => 'hour'],
+				['number' => '67', 'type' => 'hour'],
+				['number' => '80', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUT5') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '19', 'type' => 'hour'],
+				['number' => '48', 'type' => 'hour'],
+				['number' => '71', 'type' => 'hour'],
+				['number' => '76', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW40EUT6') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '19', 'type' => 'hour'],
+				['number' => '38', 'type' => 'hour'],
+				['number' => '55', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW50AAT1') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '13', 'type' => 'hour'],
+				['number' => '55', 'type' => 'hour'],
+				['number' => '69', 'type' => 'hour'],
+				['number' => '79', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW50EUT2') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '24', 'type' => 'hour'],
+				['number' => '41', 'type' => 'hour'],
+				['number' => '60', 'type' => 'hour'],
+				['number' => '82', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW50EUT3') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '18', 'type' => 'hour'],
+				['number' => '35', 'type' => 'hour'],
+				['number' => '63', 'type' => 'hour'],
+				['number' => '83', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW50EUT4'
+			or substr($label, 0, 8) === 'GW50EUT5') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '2', 'type' => 'hour'],
+				['number' => '4', 'type' => 'hour'],
+				['number' => '6', 'type' => 'hour'],
+				['number' => '8', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 8) === 'GW50EUT6') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '2', 'type' => 'hour'],
+				['number' => '4', 'type' => 'hour']
+			];
+			
+		}
+		
 		file_put_contents($directory.'filter.log', var_export([$allowed,$types,$titles],true));
 		
 		echo PHP_EOL.'Ripping DVD...';
