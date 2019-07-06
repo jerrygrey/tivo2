@@ -185,25 +185,11 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if (substr($label, 0, 8) === 'GW40EUT3') {
+		if (substr($label, 0, 8) === 'GW40EUT4') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
-				['number' => '29', 'type' => 'hour'],
-				['number' => '45', 'type' => 'hour'],
-				['number' => '66', 'type' => 'hour'],
-				['number' => '78', 'type' => 'hour']
-			];
-			
-		}
-		
-		if (substr($label, 0, 8) === 'GW40EUG4') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '16', 'type' => 'hour'],
 				['number' => '50', 'type' => 'hour'],
 				['number' => '67', 'type' => 'hour'],
 				['number' => '80', 'type' => 'hour']
