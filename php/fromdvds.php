@@ -133,7 +133,7 @@ foreach ($discs as $disc) {
 			
 		}*/
 		
-		if ($label === 'THE_KING_OF_QUEENS_S9') {
+		if ($label === 'THEKINGOFQUEENSS9') {
 			
 			$allowed = ':hour:';
 			
@@ -143,7 +143,7 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if ($label === 'THE_KING_OF_QUEENS_S8') {
+		if ($label === 'THEKINGOFQUEENSS8') {
 			
 			$allowed = ':hour:';
 			
@@ -154,7 +154,7 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if ($label === 'DVD_VIDEO') {
+		if ($label === 'DVDVIDEO') {
 			
 			$allowed = ':hour:';
 			
