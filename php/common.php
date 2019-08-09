@@ -15,7 +15,7 @@ define('DIR_WORKING', WORKING_DRIVE.'Working'.DIRECTORY_SEPARATOR);
 define('HANDBRAKE', WORKING_DRIVE.'TiVo2'.DIRECTORY_SEPARATOR.'handbrake'.DIRECTORY_SEPARATOR.'handbrake.exe');
 
 define('HANDBRAKE_FILE', HANDBRAKE.' -i "%s" -o "%s.m4v" --main-feature -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
-define('HANDBRAKE_SCAN', HANDBRAKE.' -i "%s" --title 0 -e x265 --min-duration 1200 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
+define('HANDBRAKE_SCAN', HANDBRAKE.' -i "%s" --title 0 -e x265 --min-duration 600 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
 define('HANDBRAKE_DVD', HANDBRAKE.' -i "%s" -o "%s.m4v" --title %d -e x265 --two-pass --audio-lang-list eng --first-audio --normalize-mix 1 --drc 1.5 --keep-display-aspect --native-language eng --native-dub 2>&1');
 
 define('CSCRIPT', WINDOWS_DRIVE.'Windows'.DIRECTORY_SEPARATOR.'SysWoW64'.DIRECTORY_SEPARATOR.'cscript /nologo "%s"');
