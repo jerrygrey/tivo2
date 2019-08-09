@@ -154,6 +154,26 @@ foreach ($discs as $disc) {
 			
 		}
 		
+		if (substr($label, 0, 21) === 'THEMIDDLESEASON1DISC3') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '6', 'type' => 'hour']
+			];
+			
+		}
+		
+		if (substr($label, 0, 21) === 'THEMIDDLESEASON2DISC3') {
+			
+			$allowed = ':hour:';
+			
+			$titles = [
+				['number' => '9', 'type' => 'hour']
+			];
+			
+		}
+		
 		file_put_contents($directory.'filter.log', var_export([$allowed,$types,$titles],true));
 		
 		echo PHP_EOL.'Ripping DVD...';
