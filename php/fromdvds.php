@@ -133,7 +133,7 @@ foreach ($discs as $disc) {
 			
 		}*/
 		
-		if ($label === 'THEKINGOFQUEENSS9') {
+		if (substr($label, 0, 17) === 'THEKINGOFQUEENSS9') {
 			
 			$allowed = ':hour:';
 			
@@ -143,28 +143,13 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if ($label === 'THEKINGOFQUEENSS8') {
+		if (substr($label, 0, 17) === 'THEKINGOFQUEENSS8') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
 				['number' => '6', 'type' => 'hour'],
 				['number' => '7', 'type' => 'hour']
-			];
-			
-		}
-		
-		if ($label === 'DVDVIDEO') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '1', 'type' => 'hour'],
-				['number' => '2', 'type' => 'hour'],
-				['number' => '3', 'type' => 'hour'],
-				['number' => '4', 'type' => 'hour'],
-				['number' => '5', 'type' => 'hour'],
-				['number' => '6', 'type' => 'hour']
 			];
 			
 		}
