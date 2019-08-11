@@ -133,43 +133,43 @@ foreach ($discs as $disc) {
 			
 		}*/
 		
-		if (substr($label, 0, 17) === 'THEKINGOFQUEENSS9') {
+		if (substr($label, 0, 20) === 'THEWALKINGDEADS06D05') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
-				['number' => '7', 'type' => 'hour']
+				['number' => '42', 'type' => 'hour']
 			];
 			
 		}
 		
-		if (substr($label, 0, 17) === 'THEKINGOFQUEENSS8') {
+		if (substr($label, 0, 20) === 'THEWALKINGDEADS06D01'
+			or substr($label, 0, 20) === 'THEWALKINGDEADS06D02') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
-				['number' => '6', 'type' => 'hour'],
-				['number' => '7', 'type' => 'hour']
+				['number' => '22', 'type' => 'hour']
 			];
 			
 		}
 		
-		if (substr($label, 0, 21) === 'THEMIDDLESEASON1DISC3') {
+		if (substr($label, 0, 8) === '55254SDO') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
-				['number' => '6', 'type' => 'hour']
+				['number' => '5', 'type' => 'hour']
 			];
 			
 		}
 		
-		if (substr($label, 0, 21) === 'THEMIDDLESEASON2DISC3') {
+		if (substr($label, 0, 14) === 'THEWALKINGDEAD') {
 			
 			$allowed = ':hour:';
 			
 			$titles = [
-				['number' => '9', 'type' => 'hour']
+				['number' => '1', 'type' => 'hour']
 			];
 			
 		}
