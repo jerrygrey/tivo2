@@ -103,12 +103,12 @@ foreach ($discs as $disc) {
 				$types['half']++;
 				$titles[$id]['type'] = 'half';
 				
-			} else if ($title['time'] > (37*60) and $title['time'] < (45*60)) {
+			} elseif ($title['time'] > (37*60) and $title['time'] < (45*60)) {
 				
 				$types['hour']++;
 				$titles[$id]['type'] = 'hour';
 				
-			} else if ($title['time'] > (60*60) and $title['time'] < (3*60*60)) {
+			} elseif ($title['time'] > (60*60) and $title['time'] < (3*60*60)) {
 				
 				$types['movies']++;
 				$titles[$id]['type'] = 'movie';
@@ -127,7 +127,7 @@ foreach ($discs as $disc) {
 			
 			$allowed = ':half:hour:';
 			
-		} else if ($types['hour'] >= 3) {
+		} elseif ($types['hour'] >= 3) {
 			
 			$allowed = ':hour:';
 			
@@ -141,10 +141,8 @@ foreach ($discs as $disc) {
 				['number' => '42', 'type' => 'hour']
 			];
 			
-		}
-		
-		if (substr($label, 0, 20) === 'THEWALKINGDEADS06D01'
-			or substr($label, 0, 20) === 'THEWALKINGDEADS06D02') {
+		} elseif (substr($label, 0, 20) === 'THEWALKINGDEADS06D01'
+				or substr($label, 0, 20) === 'THEWALKINGDEADS06D02') {
 			
 			$allowed = ':hour:';
 			
@@ -152,9 +150,7 @@ foreach ($discs as $disc) {
 				['number' => '22', 'type' => 'hour']
 			];
 			
-		}
-		
-		if (substr($label, 0, 8) === '55254SDO') {
+		} elseif (substr($label, 0, 8) === '55254SDO') {
 			
 			$allowed = ':hour:';
 			
@@ -162,9 +158,7 @@ foreach ($discs as $disc) {
 				['number' => '5', 'type' => 'hour']
 			];
 			
-		}
-		
-		if (substr($label, 0, 14) === 'THEWALKINGDEAD') {
+		} elseif (substr($label, 0, 14) === 'THEWALKINGDEAD') {
 			
 			$allowed = ':hour:';
 			
