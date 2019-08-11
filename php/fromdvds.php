@@ -74,109 +74,16 @@ foreach ($discs as $disc) {
 			
 			$titles[] = [
 				'number' => $title,
-				'type' => 'other',
 				'time' => $time
 			];
 			
 		}
 		
-		$types = [
-			'half' => 0,
-			'hour' => 0,
-			'movies' => 0,
-			'others' => 0
-		];
-		
-		foreach ($titles as $id => $title) {
-			
-			/*if ($id === 0 and (abs($title['time']-$total_not_first) < 10)) {
-				
-				$titles[$id]['type'] = 'skip';
-				
-			} else if ($id < (count($titles)-2)
-				   	and (abs($titles[$id+1]['time']+$titles[$id+2]['time'])-$title['time']) < 10) {
-				
-				$titles[$id]['type'] = 'skip';
-				
-			} else */if ($title['time'] < (26*60)) {
-				
-				$types['half']++;
-				$titles[$id]['type'] = 'half';
-				
-			} elseif ($title['time'] > (37*60) and $title['time'] < (45*60)) {
-				
-				$types['hour']++;
-				$titles[$id]['type'] = 'hour';
-				
-			} elseif ($title['time'] > (60*60) and $title['time'] < (3*60*60)) {
-				
-				$types['movies']++;
-				$titles[$id]['type'] = 'movie';
-				
-			} else {
-				
-				$types['others']++;
-				
-			}
-			
-		}
-		
-		$allowed = ':half:hour:movie:other:';
-		
-		/*if ($types['half'] > 3 and $types['hour'] < 2) {
-			
-			$allowed = ':half:hour:';
-			
-		} elseif ($types['hour'] >= 3) {
-			
-			$allowed = ':hour:';
-			
-		}*/
-		
-		if (substr($label, 0, 20) === 'THEWALKINGDEADS06D05') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '42', 'type' => 'hour']
-			];
-			
-		} elseif (substr($label, 0, 20) === 'THEWALKINGDEADS06D01'
-				or substr($label, 0, 20) === 'THEWALKINGDEADS06D02') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '22', 'type' => 'hour']
-			];
-			
-		} elseif (substr($label, 0, 8) === '55254SDO') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '5', 'type' => 'hour']
-			];
-			
-		} elseif (substr($label, 0, 14) === 'THEWALKINGDEAD') {
-			
-			$allowed = ':hour:';
-			
-			$titles = [
-				['number' => '1', 'type' => 'hour']
-			];
-			
-		}
-		
-		file_put_contents($directory.'filter.log', var_export([$allowed,$types,$titles],true));
+		file_put_contents($directory.'filter.log', var_export($titles, true));
 		
 		echo PHP_EOL.'Ripping DVD...';
 		
 		foreach ($titles as $title) {
-			
-			if (strpos($allowed, ':'.$title['type'].':') === false) {
-				continue;
-			}
 			
 			$log = shell_exec(sprintf(
 				HANDBRAKE_DVD, $disc,
