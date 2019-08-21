@@ -1,6 +1,8 @@
 @echo off
 SetLocal EnableDelayedExpansion
 
+ping -n 6 127.0.0.1 >nul
+
 :loop
 
 cd D:\TiVo2\scripts
