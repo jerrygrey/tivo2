@@ -22,7 +22,7 @@ foreach ($discs as $disc) {
 		
 		echo PHP_EOL.'Found DVD, scanning...';
 		
-		$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
+		/*$output = shell_exec(sprintf(HANDBRAKE_SCAN, $disc));
 		
 		$output = preg_split('#found [\d]+ valid title\(s\)#is', $output, 2);
 		
@@ -34,13 +34,15 @@ foreach ($discs as $disc) {
 			
 			continue;
 			
-		}
+		}*/
 		
-		$label = shell_exec('vol '.$disc);
+		//$label = shell_exec('vol '.$disc);
 		
-		$label = shell_clean_up($label);
+		$label = 'PARANORMALACTIVITY2';
 		
-		$label = substr($label[0], 21);
+		//$label = shell_clean_up($label);
+		
+		//$label = substr($label[0], 21);
 		
 		$label = file_clearance($label);
 		
@@ -50,11 +52,9 @@ foreach ($discs as $disc) {
 		
 		file_put_contents($directory.'dvd.log', var_export($output,true));
 		
-		preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
+		/*preg_match_all('#\+ title ([\d]+):.*duration: ([\d]{2}:[\d]{2}:[\d]{2})#Uis', $output[1], $output);
 		
 		$titles = [];
-		
-		$total_not_first = 0;
 		
 		foreach ($output[1] as $id => $title) {
 			
@@ -66,18 +66,14 @@ foreach ($discs as $disc) {
 			
 			$time = $raw[2] + $raw[1] + $raw[0];
 			
-			unset($raw);
-			
-			if ($id !== 0) {
-				$total_not_first += $time;
-			}
-			
 			$titles[] = [
 				'number' => $title,
 				'time' => $time
 			];
 			
-		}
+		}*/
+		
+		$titles = [['number' => '76']];
 		
 		file_put_contents($directory.'filter.log', var_export($titles, true));
 		
