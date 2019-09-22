@@ -71,6 +71,12 @@ foreach ($discs as $disc) {
 			
 		}
 		
+		if (substr($label, 0, 25) === 'SUPERNATURALSEASON14DISC4') {
+			
+			$titles = [['number' => '6']];
+			
+		}
+		
 		file_put_contents($directory.'filter.log', var_export($titles, true));
 		
 		echo PHP_EOL.'Ripping DVD...';
