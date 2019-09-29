@@ -71,9 +71,9 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if (substr($label, 0, 25) === 'SUPERNATURALSEASON14DISC4') {
+		if (substr($label, 0, 25) === 'SUPERNATURALSEASON14DISC3') {
 			
-			$titles = [['number' => '6']];
+			$titles = [['number' => '4']];
 			
 		}
 		
