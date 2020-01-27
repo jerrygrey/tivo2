@@ -71,15 +71,9 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if (substr($label, 0, 12) === 'DRAGMETOHELL') {
+		if (substr($label, 0, 9) === 'TOYSTORY4') {
 			
-			$titles = [['number' => '53']];
-			
-		}
-		
-		if (substr($label, 0, 5) === 'UPAUS') {
-			
-			$titles = [['number' => '68']];
+			$titles = [['number' => '1']];
 			
 		}
 		
