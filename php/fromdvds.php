@@ -100,7 +100,7 @@ foreach ($discs as $disc) {
 		
 		echo ' Done!'.PHP_EOL.'Ejecting...';
 		
-		//shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
+		shell_exec(sprintf(CSCRIPT, DIR_SCRIPTS.'ejectdisc.vbs').' '.$disc);
 		
 	} catch (Exception $e) {
 		
