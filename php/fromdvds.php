@@ -71,14 +71,24 @@ foreach ($discs as $disc) {
 			
 		}
 		
-		if (substr($label, 0, 16) === 'THEBONECOLLECTOR') {
+		if (substr($label, 0, 10) === 'DAZD0499D1') {
 			
 			$titles = [
-				['number' => '1'],
-				['number' => '2'],
-				['number' => '3'],
-				['number' => '4']
+				['number' => '5'],
+				['number' => '6']
 			];
+			
+		}
+		
+		if (substr($label, 0, 10) === 'DAZD0499D2') {
+			
+			$titles = [ ['number' => '6'] ];
+			
+		}
+		
+		if (substr($label, 0, 10) === 'DAZD0499D3') {
+			
+			$titles = [ ['number' => '5'] ];
 			
 		}
 		
